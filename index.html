@@ -1,0 +1,19 @@
+<!doctype html>
+<title>IE10 test</title>
+<h3>Current seconds on server:
+<span id="s" style="color: red"></span></h3>
+<!-- refresh link -->
+<h4><a href="/">Refresh</a></h4>
+<script>
+  // simple xhr request
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/time', true);
+  xhr.send(null);
+  xhr.onreadystatechange = function(){
+    if (4 != xhr.readyState 
+    || 200 != xhr.status) return;
+    // inject the number of seconds into dom
+    var s = document.querySelector('#s');
+    s.innerHTML = JSON.parse(xhr.responseText).seconds;
+  };
+</script>
